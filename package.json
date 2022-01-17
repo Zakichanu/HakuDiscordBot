@@ -1,0 +1,26 @@
+{
+  "name": "hakunodejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "haku.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "nodemon haku.ts",
+    "dev": "nodemon haku.ts",
+    "start": "pm2 start haku.ts --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@discordjs/voice": "^0.7.5",
+    "discord.js": "^13.5.0",
+    "dotenv": "^10.0.0",
+    "ffmpeg-static": "^4.4.1",
+    "libsodium-wrappers": "^0.7.9",
+    "wokcommands": "^1.5.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
