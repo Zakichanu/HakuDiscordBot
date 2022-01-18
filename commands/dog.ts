@@ -1,11 +1,10 @@
 import { GuildMember } from "discord.js";
-const { getVoiceConnection } = require('@discordjs/voice');
 import path from 'path'
 import { joinVoiceChannel, DiscordGatewayAdapterCreator, entersState, VoiceConnectionStatus, createAudioResource, StreamType, createAudioPlayer, AudioPlayerStatus } from '@discordjs/voice';
 import { ICommand } from "wokcommands";
 
 export default {
-    category: 'AudioSoundboard',
+    category: 'Audio Soundboard',
     description: 'Aboie',
 
     slash: true,
