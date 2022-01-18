@@ -21,7 +21,7 @@ const client = new DiscordJS.Client({
 // Connexion du bot
 client.on('ready', () => {
 
-    console.log('Haku est prêt !')
+    console.log('Haku est carrément prêt')
 
     new WOKCommands(client, {
         commandDir: path.join(__dirname, 'commands'),
