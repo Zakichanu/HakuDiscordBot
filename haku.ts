@@ -28,7 +28,7 @@ client.on('ready', async () => {
             keepAlive: true,
         }
     )
-    console.log('Haku est prêt!')
+    console.log('Haku est là !')
 
     new WOKCommands(client, {
         commandDir: path.join(__dirname, 'commands'),
