@@ -2,6 +2,7 @@ import DiscordJS, { GuildMember, Intents } from 'discord.js'
 import WOKCommands from 'wokcommands'
 import { joinVoiceChannel, DiscordGatewayAdapterCreator, entersState, VoiceConnectionStatus, createAudioResource, StreamType, createAudioPlayer, AudioPlayerStatus } from '@discordjs/voice';
 import path from 'path'
+import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 dotenv.config()
 
@@ -19,14 +20,21 @@ const client = new DiscordJS.Client({
 
 
 // Connexion du bot
-client.on('ready', () => {
+client.on('ready', async () => {
 
+    await mongoose.connect(
+        process.env.MONGO_URI || '', 
+        {
+            keepAlive: true,
+        }
+    )
     console.log('Haku est prêt!')
 
     new WOKCommands(client, {
         commandDir: path.join(__dirname, 'commands'),
         typeScript: true,
-        testServers: ['932674235388817408', '776066783622201344']
+        testServers: ['932674235388817408', '776066783622201344'],
+        botOwners: ['301865289006579713']
     }).setCategorySettings([
         {
             name: 'Audio Soundboard',
