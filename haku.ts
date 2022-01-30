@@ -1,6 +1,5 @@
 import DiscordJS, { GuildMember, Intents } from 'discord.js'
 import WOKCommands from 'wokcommands'
-import { joinVoiceChannel, DiscordGatewayAdapterCreator, entersState, VoiceConnectionStatus, createAudioResource, StreamType, createAudioPlayer, AudioPlayerStatus } from '@discordjs/voice';
 import path from 'path'
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'

@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "serve": "nodemon haku.ts",
-    "dev": "nodemon haku.ts",
+    "dev": "node ./module/topDeal.js",
     "start": "pm2 start haku.ts --watch"
   },
   "keywords": [],
@@ -19,9 +19,11 @@
     "ffmpeg-static": "^4.4.1",
     "libsodium-wrappers": "^0.7.9",
     "mongoose": "^6.1.8",
+    "puppeteer": "^13.1.2",
     "wokcommands": "^1.5.3"
   },
   "devDependencies": {
+    "@types/puppeteer": "^5.4.4",
     "nodemon": "^2.0.15"
   }
 }

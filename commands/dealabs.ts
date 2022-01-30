@@ -1,8 +1,7 @@
-import path from 'path'
 import DJS from 'discord.js'
-import { joinVoiceChannel, DiscordGatewayAdapterCreator, entersState, VoiceConnectionStatus, createAudioResource, StreamType, createAudioPlayer, AudioPlayerStatus } from '@discordjs/voice';
 import { ICommand } from "wokcommands";
 import dealabsSub from "../schema/dealabsSub";
+import topDeal from "../module/topDeal"
 
 
 export default {
@@ -47,14 +46,10 @@ export default {
 
                 }).save()
                 
-                return "Vous avez souscrit à l'alerte de dealabs"
+                return "Vous avez souscrit à l'alerte de dealabs" 
             }
         } catch (error) {
             throw error;
         }
-
-
     },
-
-
 } as ICommand
