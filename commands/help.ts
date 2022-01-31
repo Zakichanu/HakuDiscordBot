@@ -12,27 +12,34 @@ export default {
             const embed = new MessageEmbed()
                 .setTitle("Annuaire des commandes")
                 .setColor('PURPLE')
-                .setDescription("🎵 Audio Soundboard")
                 .addFields([
                     {
-                        name: '/buzzer',
+                        name: '🎵/buzzer',
                         value: 'Emet le son de Question Pour un Champion'
                     },
                     {
-                        name: '/circus',
+                        name: '🎵/circus',
                         value: "Quand dans le vocal c'est le cirque, autant y mettre de l'ambiance"
                     },
                     {
-                        name: '/dog',
+                        name: '🎵/dog',
                         value: 'Aboie'
                     },
                     {
-                        name: '/prout',
+                        name: '🎵/prout',
                         value: 'Ce bot flatule en echo'
                     },
                     {
-                        name: '/siuu',
+                        name: '🎵/siuu',
                         value: 'Cri du goat'
+                    },
+                    {
+                        name: '🎵/gmk',
+                        value: 'Il envoie sa voiture en enfer'
+                    },
+                    {
+                        name: '🚨 /dealabs', 
+                        value: 'Les meilleurs deals du site Dealabs, pour y souscrire, lancer la commande et choisissez le channel textuel dans lequel les alertes vont être affichées (vous pourreez changer de channel a votre guise)'
                     }
                 ])
                 .setThumbnail("https://c.tenor.com/Air2y_Be114AAAAC/haku-chihiro.gif")
@@ -40,8 +47,8 @@ export default {
 
 
             if ((interaction.guildId === '776066783622201344') || (interaction.guildId === '932674235388817408')) {
-                embed.addField('/sami', 'Sami qui pète')
-                embed.addField('/bag', 'Bag qui rage (saturation au max)')
+                embed.addField('[PRIVE]🎵/sami', 'Sami qui pète')
+                embed.addField('[PRIVE]🎵/bag', 'Bag qui rage (saturation au max)')
             }
 
             return embed
