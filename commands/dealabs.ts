@@ -1,8 +1,6 @@
-import DJS from 'discord.js'
+import DJS from 'discord.js';
 import { ICommand } from "wokcommands";
 import dealabsSub from "../schema/dealabsSub";
-import topDeal from "../module/topDeal"
-
 
 export default {
     category: 'Alert',
@@ -35,7 +33,7 @@ export default {
             const isAlreadyInserted = await dealabsSub.find({ guildId: interaction.guildId, channelId: target.id})
             
             if (isAlreadyInserted.length > 0) {
-                return 'Vous avez déjà souscrit à cette alerte'
+                return '❌ Vous avez déjà souscrit à cette alerte sur ce channel textuel : ' + target.name
             } else {
                 await dealabsSub.findOneAndRemove({guildId: interaction.guildId})
 
@@ -46,7 +44,7 @@ export default {
 
                 }).save()
                 
-                return "Vous avez souscrit à l'alerte de dealabs" 
+                return "✅ Vous avez souscrit à l'alerte de dealabs sur ce channel textuel : " + target.name + ' !'
             }
         } catch (error) {
             throw error;

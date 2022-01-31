@@ -1,9 +1,12 @@
-import DiscordJS, { GuildMember, Intents } from 'discord.js'
-import WOKCommands from 'wokcommands'
-import path from 'path'
-import mongoose from 'mongoose'
-import dotenv from 'dotenv'
-dotenv.config()
+import DiscordJS, { GuildMember, Intents, MessageEmbed, TextChannel } from 'discord.js';
+import WOKCommands from 'wokcommands';
+import path from 'path';
+import mongoose, { Query } from 'mongoose';
+import dotenv from 'dotenv';
+import cron from 'node-cron'; 
+dotenv.config();
+import dealabsSub from "./schema/dealabsSub";
+import topDeal from "./module/topDeal";
 
 
 // FLAGS
@@ -65,6 +68,32 @@ client.on('voiceStateUpdate', (oldState, newState) => {
     }
 
 })
+
+    // Envoie des messages des meilleurs deals tous les jours à 18h
+    cron.schedule('0 0 18 * * *', async () => {
+        
+        const subChannels  = await dealabsSub.find({});
+        for (const sub of subChannels) {
+            const channelToSend = client.channels.cache.get(sub.channelId);
+            (channelToSend as TextChannel).send('🔥🔥🔥**DEAL DU JOUR**🔥🔥🔥')
+            for(const deal of topDeal.topDeals){
+                const embed = new MessageEmbed()
+                .setTitle('🔥 ' + deal.note + ' ' + deal.titre)
+                .setColor('PURPLE')
+                .setThumbnail(deal.img)
+                .setURL(deal.url)
+
+                if(deal.prix === ''){
+                    embed.setDescription('🆓 GRATUIT')
+                }else{
+                    embed.setDescription('💰 ' + deal.prix)
+                }
+
+                (channelToSend as TextChannel).send({embeds : [embed]});
+            }
+        }
+    });
+
 
 
 
