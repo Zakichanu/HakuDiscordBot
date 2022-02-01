@@ -76,28 +76,33 @@ cron.schedule('0 0 20 * * *', async () => {
     const subChannels = await dealabsSub.find({});
     for (const sub of subChannels) {
         const channelToSend = client.channels.cache.get(sub.channelId);
-        (channelToSend as TextChannel).send('🔥🔥🔥**DEAL DU JOUR**🔥🔥🔥')
-        for (const deal of topDeal.topDeals) {
-            console.log(deal);
 
-            const embed = new MessageEmbed()
-                .setTitle('🔥 ' + deal.note + ' ' + deal.titre)
-                .setColor('PURPLE')
-                .setThumbnail(deal.img)
-                .setURL(deal.url)
+        // Envoyer l'element dans le cas ou il n'est pas 'undifined'
+        if (channelToSend != null) {
+            (channelToSend as TextChannel).send('🔥🔥🔥**DEAL DU JOUR**🔥🔥🔥')
 
-            if (deal.prix === '') {
-                embed.setDescription('🆓 GRATUIT')
-            } else {
-                embed.setDescription('💰 ' + deal.prix)
+            for (const deal of topDeal.topDeals) {
+                console.log(deal);
+
+                const embed = new MessageEmbed()
+                    .setTitle('🔥 ' + deal.note + ' ' + deal.titre)
+                    .setColor('RED')
+                    .setThumbnail(deal.img)
+                    .setURL(deal.url)
+
+                if (deal.prix === '') {
+                    embed.setDescription('🆓 GRATUIT')
+                } else {
+                    embed.setDescription('💰 ' + deal.prix)
+                }
+
+                (channelToSend as TextChannel).send({ embeds: [embed] });
             }
-
-            (channelToSend as TextChannel).send({ embeds: [embed] });
-            
+            console.log('Deals sent to channel ' + (channelToSend as TextChannel).id);
+        }else {
+            // Suppression de l'objet du model car il ne sert à rien
+            await dealabsSub.deleteOne(sub);
         }
-        console.log('Deals sent to channel ' + (channelToSend as TextChannel).id);
-
-
     }
 });
 
