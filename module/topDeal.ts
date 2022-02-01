@@ -7,9 +7,12 @@ let topDeals: { titre: string; url: string; img: string; note: string; prix: str
 (async () => {
   try {
 
-    cron.schedule('0 55 20 * * *', async () => {
+    cron.schedule('0 10 21 * * *', async () => {
       // Préparation de puppeteer
-      const browser = await puppeteer.launch({ headless: true });
+      const browser = await puppeteer.launch({ 
+        headless: true,
+        args: ['--no-sandbox']
+      });
 
       // Lancement de dealabs
       const page = await browser.newPage();
