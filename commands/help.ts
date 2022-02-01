@@ -38,8 +38,16 @@ export default {
                         value: 'Il envoie sa voiture en enfer'
                     },
                     {
-                        name: '🚨 /dealabs', 
-                        value: 'Les meilleurs deals du site Dealabs, pour y souscrire, lancer la commande et choisissez le channel textuel dans lequel les alertes vont être affichées (vous pourreez changer de channel a votre guise)'
+                        name: '🎵/olala',
+                        value: 'Il a rien apporté'
+                    },
+                    {
+                        name: '🚨 /dealabs subscribe <channel-text>',
+                        value: 'Souscription à une alerte Dealabs'
+                    },
+                    {
+                        name: '🚨 /dealabs unsubscribe', 
+                        value: "Désinscription à l'alerte Dealabs"
                     }
                 ])
                 .setThumbnail("https://c.tenor.com/Air2y_Be114AAAAC/haku-chihiro.gif")
