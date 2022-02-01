@@ -3,7 +3,7 @@ import WOKCommands from 'wokcommands';
 import path from 'path';
 import mongoose, { Query } from 'mongoose';
 import dotenv from 'dotenv';
-import cron from 'node-cron'; 
+import cron from 'node-cron';
 dotenv.config();
 import dealabsSub from "./schema/dealabsSub";
 import topDeal from "./module/topDeal";
@@ -25,7 +25,7 @@ const client = new DiscordJS.Client({
 client.on('ready', async () => {
 
     await mongoose.connect(
-        process.env.MONGO_URI || '', 
+        process.env.MONGO_URI || '',
         {
             keepAlive: true,
         }
@@ -69,30 +69,37 @@ client.on('voiceStateUpdate', (oldState, newState) => {
 
 })
 
-    // Envoie des messages des meilleurs deals tous les jours à 18h
-    cron.schedule('0 0 18 * * *', async () => {
-        
-        const subChannels  = await dealabsSub.find({});
-        for (const sub of subChannels) {
-            const channelToSend = client.channels.cache.get(sub.channelId);
-            (channelToSend as TextChannel).send('🔥🔥🔥**DEAL DU JOUR**🔥🔥🔥')
-            for(const deal of topDeal.topDeals){
-                const embed = new MessageEmbed()
+// Envoie des messages des meilleurs deals tous les jours à 18h
+
+cron.schedule('0 30 20 * * *', async () => {
+
+    const subChannels = await dealabsSub.find({});
+    for (const sub of subChannels) {
+        const channelToSend = client.channels.cache.get(sub.channelId);
+        (channelToSend as TextChannel).send('🔥🔥🔥**DEAL DU JOUR**🔥🔥🔥')
+        for (const deal of topDeal.topDeals) {
+            console.log(deal);
+
+            const embed = new MessageEmbed()
                 .setTitle('🔥 ' + deal.note + ' ' + deal.titre)
                 .setColor('PURPLE')
                 .setThumbnail(deal.img)
                 .setURL(deal.url)
 
-                if(deal.prix === ''){
-                    embed.setDescription('🆓 GRATUIT')
-                }else{
-                    embed.setDescription('💰 ' + deal.prix)
-                }
-
-                (channelToSend as TextChannel).send({embeds : [embed]});
+            if (deal.prix === '') {
+                embed.setDescription('🆓 GRATUIT')
+            } else {
+                embed.setDescription('💰 ' + deal.prix)
             }
+
+            (channelToSend as TextChannel).send({ embeds: [embed] });
+            
         }
-    });
+        console.log('Deals sent to channel ' + (channelToSend as TextChannel).id);
+
+
+    }
+});
 
 
 

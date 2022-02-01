@@ -7,7 +7,7 @@ let topDeals: { titre: string; url: string; img: string; note: string; prix: str
 (async () => {
   try {
 
-    cron.schedule('0 50 17 * * *', async () => {
+    cron.schedule('0 27 20 * * *', async () => {
       // Préparation de puppeteer
       const browser = await puppeteer.launch({ headless: true });
 
@@ -77,7 +77,10 @@ let topDeals: { titre: string; url: string; img: string; note: string; prix: str
             note: upvote,
             prix: price
           });
+          
         }
+        console.log('----------- EXTRACTION DES DEALS -------')
+        console.log(topDeals)
         await browser.close();
       }, 2000);
     });
