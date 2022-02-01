@@ -71,7 +71,7 @@ client.on('voiceStateUpdate', (oldState, newState) => {
 
 // Envoie des messages des meilleurs deals tous les jours à 18h
 
-cron.schedule('0 30 20 * * *', async () => {
+cron.schedule('0 0 21 * * *', async () => {
 
     const subChannels = await dealabsSub.find({});
     for (const sub of subChannels) {
