@@ -1,3 +1,5 @@
+![Discord Bots](https://top.gg/api/widget/upvotes/932725902691958815.svg)
+
 <img src="https://data.whicdn.com/images/343785683/original.jpg" width="200px" height="200px" />
 
 ## Haku
