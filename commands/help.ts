@@ -42,6 +42,14 @@ export default {
                         value: 'Il a rien apporté'
                     },
                     {
+                        name: '🎵/dehors',
+                        value: 'DEHOOOOORS'
+                    },
+                    {
+                        name: '🎵/lait',
+                        value: 'Il est lent ce lait'
+                    },
+                    {
                         name: '🚨 /dealabs subscribe <channel-text>',
                         value: 'Souscription à une alerte Dealabs'
                     },
