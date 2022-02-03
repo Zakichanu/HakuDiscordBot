@@ -35,5 +35,28 @@ Ajoutez le à votre serveur ici : [HakuBot](https://discord.com/api/oauth2/autho
 - 🚨 /dealabs subscribe <channel-text> : Souscription à une alerte Dealabs
 
 - 🚨 /dealabs unsubscribe : Désinscription à l'alerte Dealabs
-
+  
+  
+  
+  
+### Forker le projet
+  
+  Ajouter un fichier .env avec deux variables d'environnement : 
+  ```
+  TOKEN= <TOKEN DISCORD BOT>
+  MONGO_URI= <TOKEN MONGO DB>
+  ```
+  Une fois que vous aurez ce fichier ainsi que les clés associées, lancer l'installation des paquets :
+  
+  ````
+  npm install
+  ````
+  
+  Ensuite tester votre application avec la commande suivante : 
+   
+  ````
+  npm run serve
+  ````
+  Si cela ne marche pas, ouvrir un ticket issue sur ce repository.
+  
 > Fait par Zakichanu et avec l'aide de Mehdi
