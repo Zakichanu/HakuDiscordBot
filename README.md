@@ -52,7 +52,7 @@ Ajoutez le à votre serveur ici : [HakuBot](https://discord.com/api/oauth2/autho
   npm install
   ````
   
-  Ensuite tester votre application avec la commande suivante : 
+  Ensuite tester l'application avec la commande suivante : 
    
   ````
   npm run serve
