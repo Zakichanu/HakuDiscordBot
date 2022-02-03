@@ -1,4 +1,4 @@
-![Discord Bots](https://top.gg/api/widget/upvotes/932725902691958815.svg)
+
 
 <img src="https://data.whicdn.com/images/343785683/original.jpg" width="200px" height="200px" />
 
@@ -60,3 +60,7 @@ Ajoutez le à votre serveur ici : [HakuBot](https://discord.com/api/oauth2/autho
   Si cela ne marche pas, ouvrir un ticket issue sur ce repository.
   
 > Fait par Zakichanu et avec l'aide de Mehdi
+  
+  Merci de mettre un upvote ici :
+  
+  <a href="https://discordbotlist.com/bots/932725902691958815"><img src="https://discordbotlist.com/api/v1/bots/932725902691958815/widget"></a>
