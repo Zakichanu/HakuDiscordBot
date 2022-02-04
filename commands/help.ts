@@ -64,6 +64,7 @@ export default {
 
             if ((interaction.guildId === '776066783622201344') || (interaction.guildId === '932674235388817408')) {
                 embed.addField('[PRIVE]🎵/sami', 'Sami qui pète')
+                embed.addField('[PRIVE]🎵/sami', 'WAllah de Sami')
                 embed.addField('[PRIVE]🎵/bag', 'Bag qui rage (saturation au max)')
             }
 
