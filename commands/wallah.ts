@@ -6,7 +6,7 @@ import { ICommand } from "wokcommands";
 export default {
     category: 'Audio Soundboard',
     description: 'Wallaaaaaaaaaaaaah',
-
+    testOnly: true,
     slash: true,
 
 
