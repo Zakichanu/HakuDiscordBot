@@ -8,6 +8,10 @@ let topDeals: { titre: string; url: string; img: string; note: string; prix: str
   try {
 
     cron.schedule('0 58 19 * * *', async () => {
+
+      // Met topDeals à vide
+      topDeals = [];
+
       // Préparation de puppeteer
       const browser = await puppeteer.launch({ 
         headless: true,
