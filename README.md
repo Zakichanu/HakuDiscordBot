@@ -30,6 +30,8 @@ Ajoutez le à votre serveur ici : [HakuBot](https://discord.com/api/oauth2/autho
 
 - 🎵/lait : Il est lent ce lait
 
+- 🎵/uwu : UwU 👉👈
+
 #### 🚨 Alertes
 
 - 🚨 /dealabs subscribe <channel-text> : Souscription à une alerte Dealabs
