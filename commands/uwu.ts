@@ -39,7 +39,7 @@ export default {
 
                     connection.subscribe(player)
 
-                    return new MessageAttachment("https://c.tenor.com/k77nPu48egYAAAAM/uw-u-kawai.gif")
+                    return new 'UwU'
                 } catch (error) {
                     connection.destroy();
                     throw error;
