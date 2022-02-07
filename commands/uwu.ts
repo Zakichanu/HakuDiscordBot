@@ -39,7 +39,7 @@ export default {
 
                     connection.subscribe(player)
 
-                    return new 'UwU'
+                    return 'UwU'
                 } catch (error) {
                     connection.destroy();
                     throw error;
