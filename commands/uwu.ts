@@ -1,4 +1,4 @@
-import { GuildMember } from "discord.js";
+import { GuildMember, MessageAttachment } from "discord.js";
 import path from 'path'
 import { joinVoiceChannel, DiscordGatewayAdapterCreator, entersState, VoiceConnectionStatus, createAudioResource, StreamType, createAudioPlayer, AudioPlayerStatus } from '@discordjs/voice';
 import { ICommand } from "wokcommands";
@@ -39,7 +39,7 @@ export default {
 
                     connection.subscribe(player)
 
-                    return 'Uwuuuu!'
+                    return new MessageAttachment("https://c.tenor.com/k77nPu48egYAAAAM/uw-u-kawai.gif")
                 } catch (error) {
                     connection.destroy();
                     throw error;

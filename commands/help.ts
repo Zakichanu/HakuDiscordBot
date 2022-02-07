@@ -50,6 +50,10 @@ export default {
                         value: 'Il est lent ce lait'
                     },
                     {
+                        name: '🎵/uwu',
+                        value: 'UwU'
+                    },
+                    {
                         name: '🚨 /dealabs subscribe <channel-text>',
                         value: 'Souscription à une alerte Dealabs'
                     },
