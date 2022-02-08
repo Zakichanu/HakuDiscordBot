@@ -45,7 +45,8 @@ Ajoutez le à votre serveur ici : [HakuBot](https://discord.com/api/oauth2/autho
   
   Ajouter un fichier .env avec deux variables d'environnement : 
   ```
-  TOKEN= <TOKEN DISCORD BOT>
+  TOKEN_DEV= <TOKEN DEV DISCORD BOT>
+  TOKEN_PROD= <TOKEN PROD DISCORD BOT>
   MONGO_URI= <TOKEN MONGO DB>
   ```
   Une fois que vous aurez ce fichier ainsi que les clés associées, lancer l'installation des paquets :
@@ -55,9 +56,9 @@ Ajoutez le à votre serveur ici : [HakuBot](https://discord.com/api/oauth2/autho
   ````
   
   Ensuite tester l'application avec la commande suivante : 
-   
+   - Sur un environnement de dev
   ````
-  npm run serve
+  npm run development
   ````
   Si cela ne marche pas, ouvrir un ticket issue sur ce repository.
   

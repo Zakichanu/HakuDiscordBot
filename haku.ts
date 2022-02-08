@@ -98,7 +98,7 @@ cron.schedule('0 0 20 * * *', async () => {
 
                 (channelToSend as TextChannel).send({ embeds: [embed] });
             }
-            console.log(new Date().toLocaleString() + ' Deals sent to channel ' + (channelToSend as TextChannel).id);
+            console.log(new Date().toLocaleString() + ' Deals sent to channel ' + (channelToSend as TextChannel).id);           
         }else {
             // Suppression de l'objet du model car il ne sert à rien
             await dealabsSub.deleteOne(sub);
@@ -112,5 +112,10 @@ cron.schedule('0 0 20 * * *', async () => {
 
 
 
+if(process.env.NODE_ENV === 'production'){
+    client.login(process.env.TOKEN_PROD)
+}else if(process.env.NODE_ENV === 'development'){
+    client.login(process.env.TOKEN_DEV)
+}
+console.log(process.env.NODE_ENV)
 
-client.login(process.env.TOKEN)
