@@ -5,8 +5,9 @@ import { ICommand } from "wokcommands";
 
 export default {
     category: 'Audio Soundboard',
-    description: 'Boucher vos nez',
+    description: 'Bag est nrv',
 
+    testOnly: true,
     slash: true,
 
 
@@ -15,9 +16,9 @@ export default {
         try {
             const player = createAudioPlayer();
 
-            const resource = createAudioResource(path.join('./sound/', 'Prout.mov'), {
+            const resource = createAudioResource(path.join('./sound/', 'Nrv.mp3'), {
                 inputType: StreamType.Arbitrary,
-
+ 
             });
 
             player.play(resource);
@@ -40,8 +41,8 @@ export default {
 
                     connection.subscribe(player)
 
-                    return 'Je lâche une caisse'
-                } catch (error) {
+                    return 'Ca rage par ici'
+                } catch (error) {  
                     connection.destroy();
                     throw error;
                 }
@@ -51,9 +52,5 @@ export default {
         } catch (error) {
             throw error;
         }
-
-
-
-
     },
 } as ICommand

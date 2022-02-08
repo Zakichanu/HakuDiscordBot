@@ -1,12 +1,11 @@
-import { GuildMember } from "discord.js";
+import { GuildMember, MessageAttachment } from "discord.js";
 import path from 'path'
 import { joinVoiceChannel, DiscordGatewayAdapterCreator, entersState, VoiceConnectionStatus, createAudioResource, StreamType, createAudioPlayer, AudioPlayerStatus } from '@discordjs/voice';
 import { ICommand } from "wokcommands";
 
 export default {
     category: 'Audio Soundboard',
-    description: 'Boucher vos nez',
-
+    description: 'Uwuuuu',
     slash: true,
 
 
@@ -15,7 +14,7 @@ export default {
         try {
             const player = createAudioPlayer();
 
-            const resource = createAudioResource(path.join('./sound/', 'Prout.mov'), {
+            const resource = createAudioResource(path.join('./sound/', 'Uwu.mp3'), {
                 inputType: StreamType.Arbitrary,
 
             });
@@ -40,7 +39,7 @@ export default {
 
                     connection.subscribe(player)
 
-                    return 'Je lâche une caisse'
+                    return 'UwU'
                 } catch (error) {
                     connection.destroy();
                     throw error;

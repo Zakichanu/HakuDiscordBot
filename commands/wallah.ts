@@ -5,8 +5,8 @@ import { ICommand } from "wokcommands";
 
 export default {
     category: 'Audio Soundboard',
-    description: 'Boucher vos nez',
-
+    description: 'Wallaaaaaaaaaaaaah',
+    testOnly: true,
     slash: true,
 
 
@@ -15,7 +15,7 @@ export default {
         try {
             const player = createAudioPlayer();
 
-            const resource = createAudioResource(path.join('./sound/', 'Prout.mov'), {
+            const resource = createAudioResource(path.join('./sound/', 'Wallah.mov'), {
                 inputType: StreamType.Arbitrary,
 
             });
@@ -40,7 +40,7 @@ export default {
 
                     connection.subscribe(player)
 
-                    return 'Je lâche une caisse'
+                    return 'Wallaaaaaaaaaaaaah!'
                 } catch (error) {
                     connection.destroy();
                     throw error;

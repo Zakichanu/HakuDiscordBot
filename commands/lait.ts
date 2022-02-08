@@ -5,7 +5,7 @@ import { ICommand } from "wokcommands";
 
 export default {
     category: 'Audio Soundboard',
-    description: 'Boucher vos nez',
+    description: 'IL EST LENT CE LAIT',
 
     slash: true,
 
@@ -15,7 +15,7 @@ export default {
         try {
             const player = createAudioPlayer();
 
-            const resource = createAudioResource(path.join('./sound/', 'Prout.mov'), {
+            const resource = createAudioResource(path.join('./sound/', 'Lait.mp3'), {
                 inputType: StreamType.Arbitrary,
 
             });
@@ -40,7 +40,7 @@ export default {
 
                     connection.subscribe(player)
 
-                    return 'Je lâche une caisse'
+                    return '🥛 Très lent'
                 } catch (error) {
                     connection.destroy();
                     throw error;
