@@ -8,7 +8,8 @@
     "serve": "nodemon haku.ts",
     "dev": "node ./module/topDeal.js",
     "start": "pm2 start haku.ts --watch",
-    "production": "cross-env NODE_ENV=production pm2 restart haku",
+    "restart": "pm2 restart haku",
+    "production": "cross-env NODE_ENV=production npm run restart",
     "development": "cross-env NODE_ENV=development npm run serve"
   },
   "keywords": [],
