@@ -7,9 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "serve": "nodemon haku.ts",
     "dev": "node ./module/topDeal.js",
-    "start": "pm2 start haku.ts --watch",
     "restart": "pm2 restart haku",
-    "production": "cross-env NODE_ENV=production npm run restart",
+    "production": "cross-env NODE_ENV=production npm run serve",
     "development": "cross-env NODE_ENV=development npm run serve"
   },
   "keywords": [],
