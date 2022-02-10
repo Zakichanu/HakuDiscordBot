@@ -5,9 +5,11 @@
   "main": "haku.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "serve": "nodemon haku.ts",
-    "dev": "node ./module/topDeal.js",
-    "start": "pm2 start haku.ts --watch"
+    "serve": "pm2 start haku.ts --watch",
+    "dev": "nodemon haku.ts",
+    "restart": "pm2 restart haku",
+    "production": "cross-env NODE_ENV=production npm run serve",
+    "development": "cross-env NODE_ENV=development npm run dev"
   },
   "keywords": [],
   "author": "",
@@ -21,11 +23,13 @@
     "mongoose": "^6.1.8",
     "node-cron": "^3.0.0",
     "puppeteer": "^13.1.2",
+    "spotify-web-api-node": "^5.0.2",
     "wokcommands": "^1.5.3"
   },
   "devDependencies": {
     "@types/node-cron": "^3.0.1",
     "@types/puppeteer": "^5.4.4",
+    "cross-env": "^7.0.3",
     "nodemon": "^2.0.15"
   }
 }

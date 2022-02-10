@@ -109,4 +109,4 @@ cron.schedule('0 0 20 * * *', async () => {
 
 
 
-client.login(process.env.TOKEN)
+client.login(process.env.TOKEN_DEV)
