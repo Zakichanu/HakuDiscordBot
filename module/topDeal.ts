@@ -8,6 +8,7 @@ let topDeals: { titre: string; url: string; img: string; note: string; prix: str
   try {
 
     cron.schedule('0 58 19 * * *', async () => {
+
       // Préparation de puppeteer
       const browser = await puppeteer.launch({ 
         headless: true,
@@ -82,14 +83,16 @@ let topDeals: { titre: string; url: string; img: string; note: string; prix: str
           });
           
         }
-        console.log('----------- EXTRACTION DES DEALS -------')
+        console.log(new Date().toLocaleString() + ' ----------- EXTRACTION DES DEALS -------')
         console.log(topDeals)
         await browser.close();
       }, 2000);
     });
 
+
+
   } catch (error) {
-    console.log(error);
+    (new Date().toLocaleString() + ' ' + error);
     throw error;
   }
 })();

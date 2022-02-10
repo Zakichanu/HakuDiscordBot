@@ -42,6 +42,18 @@ export default {
                         value: 'Il a rien apporté'
                     },
                     {
+                        name: '🎵/dehors',
+                        value: 'DEHOOOOORS'
+                    },
+                    {
+                        name: '🎵/lait',
+                        value: 'Il est lent ce lait'
+                    },
+                    {
+                        name: '🎵/uwu',
+                        value: 'UwU'
+                    },
+                    {
                         name: '🚨 /dealabs subscribe <channel-text>',
                         value: 'Souscription à une alerte Dealabs'
                     },
@@ -56,6 +68,7 @@ export default {
 
             if ((interaction.guildId === '776066783622201344') || (interaction.guildId === '932674235388817408')) {
                 embed.addField('[PRIVE]🎵/sami', 'Sami qui pète')
+                embed.addField('[PRIVE]🎵/wallah', 'WAllah de Sami')
                 embed.addField('[PRIVE]🎵/bag', 'Bag qui rage (saturation au max)')
             }
 
