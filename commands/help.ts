@@ -70,6 +70,7 @@ export default {
                 embed.addField('[PRIVE]🎵/sami', 'Sami qui pète')
                 embed.addField('[PRIVE]🎵/wallah', 'WAllah de Sami')
                 embed.addField('[PRIVE]🎵/bag', 'Bag qui rage (saturation au max)')
+                embed.addField('[PRIVE]🎵/sexe', "DEMANDE MOI CE QUE J'AIME")
             }
 
             return embed
