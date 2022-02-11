@@ -6,10 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "serve": "pm2 start haku.ts --watch",
-    "dev": "node ./module/topDeal.js",
+    "dev": "nodemon haku.ts",
     "restart": "pm2 restart haku",
     "production": "cross-env NODE_ENV=production npm run serve",
-    "development": "cross-env NODE_ENV=development npm run serve"
+    "development": "cross-env NODE_ENV=development npm run dev"
   },
   "keywords": [],
   "author": "",
