@@ -5,7 +5,7 @@ import { ICommand } from "wokcommands";
 
 export default {
     category: 'Audio Soundboard',
-    description: 'Ah j aime le sexe',
+    description: "Ah j'aime le sexe",
     slash: true,
 
 	testOnly: true,
