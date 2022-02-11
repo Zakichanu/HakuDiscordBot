@@ -39,7 +39,7 @@ export default {
 
                     connection.subscribe(player)
 
-                    return 'Ah j aime le sexe!'
+                    return "Ah j'aime le sexe"
                 } catch (error) {
                     connection.destroy();
                     throw error;
