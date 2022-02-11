@@ -30,7 +30,7 @@ client.on('ready', async () => {
             keepAlive: true,
         }
     )
-    console.log('Haku est là !!')
+    console.log(new Date().toLocaleString() + ' Haku est là !!')
 
     new WOKCommands(client, {
         commandDir: path.join(__dirname, 'commands'),
@@ -82,7 +82,7 @@ cron.schedule('0 0 20 * * *', async () => {
             (channelToSend as TextChannel).send('🔥🔥🔥**DEAL DU JOUR**🔥🔥🔥')
 
             for (const deal of topDeal.topDeals) {
-                console.log(deal);
+                console.log(new Date().toLocaleString() + ' ' + deal);
 
                 const embed = new MessageEmbed()
                     .setTitle('🔥 ' + deal.note + ' ' + deal.titre)
@@ -98,15 +98,24 @@ cron.schedule('0 0 20 * * *', async () => {
 
                 (channelToSend as TextChannel).send({ embeds: [embed] });
             }
-            console.log('Deals sent to channel ' + (channelToSend as TextChannel).id);
+            console.log(new Date().toLocaleString() + ' Deals sent to channel ' + (channelToSend as TextChannel).id);           
         }else {
             // Suppression de l'objet du model car il ne sert à rien
             await dealabsSub.deleteOne(sub);
         }
     }
+
+    // Rendre la liste des deals à vide
+    topDeal.topDeals.length = 0;
+    console.log(topDeal.topDeals)
 });
 
 
 
+if(process.env.NODE_ENV === 'production'){
+    client.login(process.env.TOKEN_PROD)
+}else if(process.env.NODE_ENV === 'development'){
+    client.login(process.env.TOKEN_DEV)
+}
+console.log(process.env.NODE_ENV)
 
-client.login(process.env.TOKEN_DEV)

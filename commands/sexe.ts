@@ -5,7 +5,7 @@ import { ICommand } from "wokcommands";
 
 export default {
     category: 'Audio Soundboard',
-    description: 'Ah j aime le sexe',
+    description: "Ah j'aime le sexe",
     slash: true,
 
 	testOnly: true,
@@ -39,7 +39,7 @@ export default {
 
                     connection.subscribe(player)
 
-                    return 'Ah j aime le sexe!'
+                    return "Ah j'aime le sexe"
                 } catch (error) {
                     connection.destroy();
                     throw error;
