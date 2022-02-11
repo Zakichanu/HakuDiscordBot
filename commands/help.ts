@@ -71,6 +71,7 @@ export default {
                 embed.addField('[PRIVE]🎵/wallah', 'WAllah de Sami')
                 embed.addField('[PRIVE]🎵/bag', 'Bag qui rage (saturation au max)')
                 embed.addField('[PRIVE]🎵/sexe', "DEMANDE MOI CE QUE J'AIME")
+                embed.addField('[PRIVE]🎵/bellebite', "SORS LE MIELZER")
             }
 
             return embed
