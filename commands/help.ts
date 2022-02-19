@@ -54,6 +54,10 @@ export default {
                         value: 'UwU'
                     },
                     {
+                        name: '🎵/bander',
+                        value: 'Ça me fait bander'
+                    },
+                    {
                         name: '🚨 /dealabs subscribe <channel-text>',
                         value: 'Souscription à une alerte Dealabs'
                     },
