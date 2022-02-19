@@ -85,15 +85,15 @@ cron.schedule('0 0 20 * * *', async () => {
                 console.log(new Date().toLocaleString() + ' ' + deal);
 
                 const embed = new MessageEmbed()
-                    .setTitle('🔥 ' + deal.note + ' ' + deal.titre)
+                    .setTitle('🔥 ' + deal.upvote + ' ' + deal.title)
                     .setColor('RED')
                     .setThumbnail(deal.img)
                     .setURL(deal.url)
 
-                if (deal.prix === '') {
+                if (deal.price === '') {
                     embed.setDescription('🆓 GRATUIT')
                 } else {
-                    embed.setDescription('💰 ' + deal.prix)
+                    embed.setDescription('💰 ' + deal.price)
                 }
 
                 (channelToSend as TextChannel).send({ embeds: [embed] });
