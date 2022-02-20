@@ -11,7 +11,7 @@ let topDeals: { title: string; url: string; img: string; upvote: string; price: 
 
       var options = {
         'method': 'GET',
-        'url': 'https://api.dealabs.zakichanu.com/dealabs/topDeals',
+        'url': 'https://api.dealabs.zakichanu.com/topDeals',
         'headers': {
         }
       };
