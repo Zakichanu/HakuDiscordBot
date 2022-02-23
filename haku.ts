@@ -90,7 +90,7 @@ cron.schedule('0 0 20 * * *', async () => {
                     .setThumbnail(deal.img)
                     .setURL(deal.url)
 
-                if (deal.price === '') {
+                if (deal.price === 'FREE') {
                     embed.setDescription('🆓 GRATUIT')
                 } else {
                     embed.setDescription('💰 ' + deal.price)
