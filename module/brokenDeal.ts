@@ -2,7 +2,10 @@ import cron from 'node-cron';
 import request from 'request';
 
 // Array stockant les bons plans
-let topDeals: { title: string; url: string; img: string; upvote: string; price: string;  }[] = [];
+let brokenDeals: {
+  title: string; url: string; img: string; upvote: string; price: string; username: string;
+  insertedTime: string, expiredTime: string;
+}[] = [];
 interface dataJson{
   "information": string,
   "data": any
@@ -11,11 +14,11 @@ interface dataJson{
 (async () => {
   try {
 
-    cron.schedule('0 58 19 * * *', async () => {
+    cron.schedule('15 * * * * *', async () => {
 
       var options = {
         'method': 'GET',
-        'url': 'https://api.dealabs.zakichanu.com/topDeals',
+        'url': 'https://api.dealabs.zakichanu.com/newDeals',
         'headers': {
         }
       };
@@ -25,16 +28,17 @@ interface dataJson{
 
           if(responseJson.information === "DEALS FOUND"){
             responseJson.data.forEach((item: any) => {
-              topDeals.push({
+              brokenDeals.push({
                 title: item.title,
-                url: item.url,
                 img: item.img,
+                expiredTime: item.expiredTime,
+                insertedTime: item.insertedTime,
                 price: item.price,
                 upvote: item.upvote,
+                url: item.url,
+                username: item.username
               })
             });
-          }else{
-            console.log(responseJson.information)
           }
         }
         
@@ -50,5 +54,5 @@ interface dataJson{
     throw error;
   }
 })();
-
-export default { topDeals };
+ 
+export default { brokenDeals };
