@@ -1,12 +1,20 @@
 import DiscordJS, { GuildMember, Intents, MessageEmbed, TextChannel } from 'discord.js';
 import WOKCommands from 'wokcommands';
 import path from 'path';
-import mongoose, { Query } from 'mongoose';
+import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import cron from 'node-cron';
 dotenv.config();
 import dealabsSub from "./schema/dealabsSub";
 import topDeal from "./module/topDeal";
+import brokenDeal from "./module/brokenDeal";
+import functions from "./module/functions";
+
+// Cache of brokenDeal array
+let brokenDealsTmp: {
+    title: string; url: string; img: string; upvote: string; price: string; username: string;
+    insertedTime: string, expiredTime: string;
+}[] = [];
 
 
 // FLAGS
@@ -69,8 +77,7 @@ client.on('voiceStateUpdate', (oldState, newState) => {
 
 })
 
-// Envoie des messages des meilleurs deals tous les jours à 18h
-
+// Envoie des messages des meilleurs deals tous les jours à 20h
 cron.schedule('0 0 20 * * *', async () => {
 
     const subChannels = await dealabsSub.find({});
@@ -98,8 +105,8 @@ cron.schedule('0 0 20 * * *', async () => {
 
                 (channelToSend as TextChannel).send({ embeds: [embed] });
             }
-            console.log(new Date().toLocaleString() + ' Deals sent to channel ' + (channelToSend as TextChannel).id);           
-        }else {
+            console.log(new Date().toLocaleString() + ' Deals sent to channel ' + (channelToSend as TextChannel).id);
+        } else {
             // Suppression de l'objet du model car il ne sert à rien
             await dealabsSub.deleteOne(sub);
         }
@@ -107,14 +114,57 @@ cron.schedule('0 0 20 * * *', async () => {
 
     // Rendre la liste des deals à vide
     topDeal.topDeals.length = 0;
-    console.log(topDeal.topDeals)
+});
+
+
+// Managing glitch price deal
+cron.schedule('45 * * * * *', async () => {
+
+    if (brokenDeal.brokenDeals.length > 0 || !functions.arrayEquals(brokenDeal.brokenDeals, brokenDealsTmp)) {
+        const subChannels = await dealabsSub.find({});
+        for (const sub of subChannels) {
+            const channelToSend = client.channels.cache.get(sub.channelId);
+
+            // Envoyer l'element dans le cas ou il n'est pas 'undifined'
+            if (channelToSend != null) {
+                (channelToSend as TextChannel).send('🚨🚨🚨**ERREUR DE PRIX**🚨🚨🚨')
+
+                for (const deal of brokenDeal.brokenDeals) {
+                    console.log(new Date().toLocaleString() + ' ' + deal);
+
+                    const embed = new MessageEmbed()
+                        .setTitle('🔥 ' + deal.upvote + ' ' + deal.title)
+                        .setColor('YELLOW')
+                        .setThumbnail(deal.img)
+                        .setURL(deal.url)
+
+                    if (deal.price === 'FREE') {
+                        embed.setDescription('🆓 GRATUIT')
+                    } else {
+                        embed.setDescription('💰 ' + deal.price)
+                    }
+
+                    (channelToSend as TextChannel).send({ embeds: [embed] });
+                }
+                console.log(new Date().toLocaleString() + ' Deals sent to channel ' + (channelToSend as TextChannel).id);
+            } else {
+                // Suppression de l'objet du model car il ne sert à rien
+                await dealabsSub.deleteOne(sub);
+            }
+        }
+        brokenDealsTmp = brokenDeal.brokenDeals;
+
+
+        // Rendre la liste des deals à vide
+        brokenDeal.brokenDeals.length = 0;
+    }
 });
 
 
 
-if(process.env.NODE_ENV === 'production'){
+if (process.env.NODE_ENV === 'production') {
     client.login(process.env.TOKEN_PROD)
-}else if(process.env.NODE_ENV === 'development'){
+} else if (process.env.NODE_ENV === 'development') {
     client.login(process.env.TOKEN_DEV)
 }
 console.log(process.env.NODE_ENV)
