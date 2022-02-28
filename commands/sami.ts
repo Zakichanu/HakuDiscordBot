@@ -16,7 +16,7 @@ export default {
         try {
             const player = createAudioPlayer();
 
-            const resource = createAudioResource(path.join('./sound/', 'Sami.mov'), {
+            const resource = createAudioResource(path.join('./sound/', 'Sami.mp4'), {
                 inputType: StreamType.Arbitrary,
 
             });
