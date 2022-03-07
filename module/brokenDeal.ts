@@ -18,7 +18,7 @@ interface dataJson{
 
       var options = {
         'method': 'GET',
-        'url': 'https://api.dealabs.zakichanu.com/newDeals',
+        'url': 'https://api.dealabs.zakichanu.com/brokenDeals',
         'headers': {
         }
       };
