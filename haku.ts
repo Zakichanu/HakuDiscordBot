@@ -8,13 +8,8 @@ dotenv.config();
 import dealabsSub from "./schema/dealabsSub";
 import topDeal from "./module/topDeal";
 import brokenDeal from "./module/brokenDeal";
-import functions from "./module/functions";
-
 // Cache of brokenDeal array
-let brokenDealsTmp: {
-    title: string; url: string; img: string; upvote: string; price: string; username: string;
-    insertedTime: string, expiredTime: string;
-}[] = [];
+let brokenDealsLength = 0;
 
 
 // FLAGS
@@ -120,7 +115,8 @@ cron.schedule('0 0 20 * * *', async () => {
 // Managing glitch price deal
 cron.schedule('45 * * * * *', async () => {
 
-    if (brokenDeal.brokenDeals.length > 0 || !functions.arrayEquals(brokenDeal.brokenDeals, brokenDealsTmp)) {
+    if (brokenDeal.brokenDeals.length > 0 ||  brokenDeal.brokenDeals.length !== brokenDealsLength) {
+        
         const subChannels = await dealabsSub.find({});
         for (const sub of subChannels) {
             const channelToSend = client.channels.cache.get(sub.channelId);
@@ -152,12 +148,11 @@ cron.schedule('45 * * * * *', async () => {
                 await dealabsSub.deleteOne(sub);
             }
         }
-        brokenDealsTmp = brokenDeal.brokenDeals;
-
-
-        // Rendre la liste des deals à vide
-        brokenDeal.brokenDeals.length = 0;
     }
+    brokenDealsLength = brokenDeal.brokenDeals.length;
+    // Rendre la liste des deals à vide
+    brokenDeal.brokenDeals.length = 0;
+    
 });
 
 
