@@ -8,8 +8,15 @@ dotenv.config();
 import dealabsSub from "./schema/dealabsSub";
 import topDeal from "./module/topDeal";
 import brokenDeal from "./module/brokenDeal";
+import functions from './module/functions';
 // Cache of brokenDeal array
 let brokenDealsLength = 0;
+
+// Cache of brokenDeal array
+let brokenDealsTmp: {
+    title: string; url: string; img: string; upvote: string; price: string; username: string;
+    insertedTime: string, expiredTime: string;
+}[] = [];
 
 
 // FLAGS
@@ -46,14 +53,10 @@ client.on('ready', async () => {
             emoji: '🎵'
         },
         {
-            name: 'Help',
-            emoji: '💡'
-        },
-        {
             name: 'Alert',
             emoji: '🚨'
         }
-    ])
+    ]).setDisplayName('Haku 🐉')
 })
 
 
@@ -114,8 +117,7 @@ cron.schedule('0 0 20 * * *', async () => {
 
 // Managing glitch price deal
 cron.schedule('45 * * * * *', async () => {
-
-    if (brokenDeal.brokenDeals.length > 0 ||  brokenDeal.brokenDeals.length !== brokenDealsLength) {
+    if (brokenDeal.brokenDeals.length > 0 &&  !functions.arrayEquals(brokenDeal.brokenDeals, brokenDealsTmp)) {
         
         const subChannels = await dealabsSub.find({});
         for (const sub of subChannels) {
@@ -149,7 +151,7 @@ cron.schedule('45 * * * * *', async () => {
             }
         }
     }
-    brokenDealsLength = brokenDeal.brokenDeals.length;
+    brokenDealsTmp = brokenDeal.brokenDeals;
     // Rendre la liste des deals à vide
     brokenDeal.brokenDeals.length = 0;
     
