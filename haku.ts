@@ -46,14 +46,10 @@ client.on('ready', async () => {
             emoji: '🎵'
         },
         {
-            name: 'Help',
-            emoji: '💡'
-        },
-        {
             name: 'Alert',
             emoji: '🚨'
         }
-    ])
+    ]).setDisplayName('Haku 🐉')
 })
 
 
