@@ -49,6 +49,10 @@ client.on('ready', async () => {
         botOwners: ['301865289006579713']
     }).setCategorySettings([
         {
+            name: 'Bot information',
+            emoji: '💡'
+        },
+        {
             name: 'Audio Soundboard',
             emoji: '🎵'
         },
