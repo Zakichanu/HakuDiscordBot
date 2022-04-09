@@ -15,7 +15,7 @@ interface dataJson{
 
       var options = {
         'method': 'GET',
-        'url': 'https://api.dealabs.zakichanu.com/topDeals',
+        'url': 'https://pepper.api.zakichanu.com/dealabs/topDeals',
         'headers': {
         }
       };
