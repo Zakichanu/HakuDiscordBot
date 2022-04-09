@@ -1,6 +1,6 @@
 
 
-<img src="https://data.whicdn.com/images/343785683/original.jpg" width="200px" height="200px" />
+<img src="https://data.whicdn.com/images/343785683/original.jpg" width="200px" height="200px" align="right" />
 
 ## Haku
 
@@ -64,7 +64,7 @@ Ajoutez le à votre serveur ici : [HakuBot](https://discord.com/api/oauth2/autho
   ````
   Si cela ne marche pas, ouvrir un ticket issue sur ce repository.
   
-> Fait par Zakichanu et avec l'aide de Mehdi
+> Fait par Zakichanu, avec l'aide de Mehdi et Baghdadi
   
   Merci de mettre un upvote ici :
   
