@@ -80,7 +80,7 @@ client.on('voiceStateUpdate', (oldState, newState) => {
 })
 
 // Envoie des messages des meilleurs deals tous les jours à 20h
-cron.schedule('0 0 20 * * *', async () => {
+cron.schedule('0 20 * * *', async () => {
 
     const subChannels = await dealabsSub.find({});
     for (const sub of subChannels) {
@@ -160,7 +160,6 @@ cron.schedule('45 * * * * *', async () => {
     brokenDeal.brokenDeals.length = 0;
     
 });
-
 
 
 if (process.env.NODE_ENV === 'production') {
