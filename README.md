@@ -33,15 +33,6 @@ Ajoutez le à votre serveur ici : [HakuBot](https://discord.com/api/oauth2/autho
 - 🎵/uwu : UwU 👉👈
 
 - 🎵/bander : Ça me fait bander
-
-#### 🚨 Alertes
-
-- 🚨 /dealabs subscribe <channel-text> : Souscription à une alerte Dealabs
-
-- 🚨 /dealabs unsubscribe : Désinscription à l'alerte Dealabs
-  
-  
-  
   
 ### Forker le projet
   

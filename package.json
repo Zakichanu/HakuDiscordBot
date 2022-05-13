@@ -22,7 +22,6 @@
     "libsodium-wrappers": "^0.7.9",
     "mongoose": "^6.1.8",
     "node-cron": "^3.0.0",
-    "request": "^2.88.2",
     "wokcommands": "^1.5.3"
   },
   "devDependencies": {
@@ -31,9 +30,6 @@
     "@types/request": "^2.48.8",
     "cross-env": "^7.0.3",
     "nodemon": "^2.0.15",
-    "npm": "^8.6.0",
-    "puppeteer": "^13.7.0",
-    "puppeteer-extra": "^3.2.3",
-    "puppeteer-extra-plugin-stealth": "^2.9.0"
+    "npm": "^8.6.0"
   }
 }
