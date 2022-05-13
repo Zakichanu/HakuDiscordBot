@@ -6,8 +6,6 @@ import dotenv from 'dotenv';
 import cron from 'node-cron';
 dotenv.config();
 import dealabsSub from "./schema/dealabsSub";
-import topDeal from "./module/topDeal";
-import brokenDeal from "./module/brokenDeal";
 import functions from './module/functions';
 // Cache of brokenDeal array
 let brokenDealsLength = 0;
@@ -78,89 +76,6 @@ client.on('voiceStateUpdate', (oldState, newState) => {
     }
 
 })
-
-// Envoie des messages des meilleurs deals tous les jours à 20h
-cron.schedule('0 20 * * *', async () => {
-
-    const subChannels = await dealabsSub.find({});
-    for (const sub of subChannels) {
-        const channelToSend = client.channels.cache.get(sub.channelId);
-
-        // Envoyer l'element dans le cas ou il n'est pas 'undifined'
-        if (channelToSend != null) {
-            (channelToSend as TextChannel).send('🔥🔥🔥**DEAL DU JOUR**🔥🔥🔥')
-
-            for (const deal of topDeal.topDeals) {
-                console.log(new Date().toLocaleString() + ' ' + deal);
-
-                const embed = new MessageEmbed()
-                    .setTitle('🔥 ' + deal.upvote + ' ' + deal.title)
-                    .setColor('RED')
-                    .setThumbnail(deal.img)
-                    .setURL(deal.url)
-
-                if (deal.price === 'FREE') {
-                    embed.setDescription('🆓 GRATUIT')
-                } else {
-                    embed.setDescription('💰 ' + deal.price)
-                }
-
-                (channelToSend as TextChannel).send({ embeds: [embed] });
-            }
-            console.log(new Date().toLocaleString() + ' Deals sent to channel ' + (channelToSend as TextChannel).id);
-        } else {
-            // Suppression de l'objet du model car il ne sert à rien
-            await dealabsSub.deleteOne(sub);
-        }
-    }
-
-    // Rendre la liste des deals à vide
-    topDeal.topDeals.length = 0;
-});
-
-
-// Managing glitch price deal
-cron.schedule('45 * * * * *', async () => {
-    if (brokenDeal.brokenDeals.length > 0 &&  !functions.arrayEquals(brokenDeal.brokenDeals, brokenDealsTmp)) {
-        
-        const subChannels = await dealabsSub.find({});
-        for (const sub of subChannels) {
-            const channelToSend = client.channels.cache.get(sub.channelId);
-
-            // Envoyer l'element dans le cas ou il n'est pas 'undifined'
-            if (channelToSend != null) {
-                (channelToSend as TextChannel).send('🚨🚨🚨**ERREUR DE PRIX**🚨🚨🚨')
-
-                for (const deal of brokenDeal.brokenDeals) {
-                    console.log(new Date().toLocaleString() + ' ' + deal);
-
-                    const embed = new MessageEmbed()
-                        .setTitle('🔥 ' + deal.upvote + ' ' + deal.title)
-                        .setColor('YELLOW')
-                        .setThumbnail(deal.img)
-                        .setURL(deal.url)
-
-                    if (deal.price === 'FREE') {
-                        embed.setDescription('🆓 GRATUIT')
-                    } else {
-                        embed.setDescription('💰 ' + deal.price)
-                    }
-
-                    (channelToSend as TextChannel).send({ embeds: [embed] });
-                }
-                console.log(new Date().toLocaleString() + ' Deals sent to channel ' + (channelToSend as TextChannel).id);
-            } else {
-                // Suppression de l'objet du model car il ne sert à rien
-                await dealabsSub.deleteOne(sub);
-            }
-        }
-    }
-    brokenDealsTmp = brokenDeal.brokenDeals;
-    // Rendre la liste des deals à vide
-    brokenDeal.brokenDeals.length = 0;
-    
-});
-
 
 if (process.env.NODE_ENV === 'production') {
     client.login(process.env.TOKEN_PROD)

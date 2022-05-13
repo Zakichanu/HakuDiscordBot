@@ -55,16 +55,16 @@ export default {
                 ])
             } else if (subcommand === 'alerts') {
                 embed.setTitle("Haku 🐉 Section des alertes")
-                embed.addFields([
-                    {
-                        name: '🚨 /dealabs subscribe <channel-text>',
-                        value: 'Souscription à une alerte Dealabs'
-                    },
-                    {
-                        name: '🚨 /dealabs unsubscribe',
-                        value: "Désinscription à l'alerte Dealabs"
-                    }
-                ])
+                // embed.addFields([
+                //     {
+                //         name: '🚨 /dealabs subscribe <channel-text>',
+                //         value: 'Souscription à une alerte Dealabs'
+                //     },
+                //     {
+                //         name: '🚨 /dealabs unsubscribe',
+                //         value: "Désinscription à l'alerte Dealabs"
+                //     }
+                // ])
             } else if (subcommand === 'soundboard') {
                 embed.setTitle("Haku 🐉 Section de l'audio")
                 embed.addFields([
