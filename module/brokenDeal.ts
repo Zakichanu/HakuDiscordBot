@@ -17,145 +17,150 @@ let brokenDeals: {
         args: ['--no-sandbox']
       });
 
-      // Lancement de dealabs
-      const page = await browser.newPage();
-      const URL = "https://www.dealabs.com/groupe/erreur-de-prix";
-      await page.goto(URL, { waitUntil: "networkidle0" });
+      try {
+        // Lancement de dealabs
+        const page = await browser.newPage();
+        const URL = "https://www.dealabs.com/groupe/erreur-de-prix";
+        await page.goto(URL, { waitUntil: "networkidle0" });
 
-      // Allow cookies
-      await page.click(
-        "button.flex--grow-1.flex--fromW3-grow-0.width--fromW3-ctrl-m.space--b-2.space--fromW3-b-0"
-      );
+        // Allow cookies
+        await page.click(
+          "button.flex--grow-1.flex--fromW3-grow-0.width--fromW3-ctrl-m.space--b-2.space--fromW3-b-0"
+        );
 
-      setTimeout(async () => {
-        try {
-          // Listing new hot deals
-          const listDeals = await page.$$("div.threadGrid");
+        setTimeout(async () => {
+          try {
+            // Listing new hot deals
+            const listDeals = await page.$$("div.threadGrid");
 
-          // initiating index for looping list of deals
-          var limit = 5;
+            // initiating index for looping list of deals
+            var limit = 5;
 
-          brokenDeals.length = 0;
+            brokenDeals.length = 0;
 
-          for (let index = 0; index < limit; index++) {
-            // Initializing variables
-            var upvote = "";
-            var imgDeal = "";
-            var insertedTime = "";
-            var expiredTime = "";
-            var url = "";
-            var title = "";
-            var price = "";
-            var username = "";
-            let element = listDeals[index];
+            for (let index = 0; index < limit; index++) {
+              // Initializing variables
+              var upvote = "";
+              var imgDeal = "";
+              var insertedTime = "";
+              var expiredTime = "";
+              var url = "";
+              var title = "";
+              var price = "";
+              var username = "";
+              let element = listDeals[index];
 
-            // Check if it is an ad
-            const pub = await element.$("button.cept-newsletter-widget-close")
+              // Check if it is an ad
+              const pub = await element.$("button.cept-newsletter-widget-close")
 
-            if (pub) {
-              limit++;
-              index++;
-              element = listDeals[index]
-            }
+              if (pub) {
+                limit++;
+                index++;
+                element = listDeals[index]
+              }
 
-            // Variable if deal is expired
-            const expiredSpan = await element.$('span.size--all-s.text--color-grey.space--l-1.space--r-2.cept-show-expired-threads.hide--toW3');
+              // Variable if deal is expired
+              const expiredSpan = await element.$('span.size--all-s.text--color-grey.space--l-1.space--r-2.cept-show-expired-threads.hide--toW3');
 
-            if (!expiredSpan) {
-              // Retrieving upvote
-              const upvoteTag = await element.$(
-                "span.cept-vote-temp.vote-temp"
-              );
+              if (!expiredSpan) {
+                // Retrieving upvote
+                const upvoteTag = await element.$(
+                  "span.cept-vote-temp.vote-temp"
+                );
 
-              // Retrieving image URL
-              const imgTag = await element.$("img.thread-image");
-              imgDeal = await page.evaluate(
-                (img) => img.getAttribute("src"),
-                imgTag
-              );
+                // Retrieving image URL
+                const imgTag = await element.$("img.thread-image");
+                imgDeal = await page.evaluate(
+                  (img) => img.getAttribute("src"),
+                  imgTag
+                );
 
-              // Retrieving inserted time
-              const insertedTimeTagParent = await element.$("span.metaRibbon.cept-meta-ribbon")
+                // Retrieving inserted time
+                const insertedTimeTagParent = await element.$("span.metaRibbon.cept-meta-ribbon")
 
-              if (insertedTimeTagParent) {
-                const insertedTimeTag = await insertedTimeTagParent.$("span");
+                if (insertedTimeTagParent) {
+                  const insertedTimeTag = await insertedTimeTagParent.$("span");
 
-                if (insertedTimeTag) {
-                  insertedTime = await page.evaluate(
-                    (tag) => tag.outerText,
-                    insertedTimeTag
-                  );
+                  if (insertedTimeTag) {
+                    insertedTime = await page.evaluate(
+                      (tag) => tag.outerText,
+                      insertedTimeTag
+                    );
+                  } else {
+                    insertedTime = ''
+                  }
+                }
+
+                // Retrieving expired time
+                const expiresIconTag = await listDeals[index].$("span.metaRibbon.cept-meta-ribbon.cept-meta-ribbon-expires")
+                if (expiresIconTag) {
+                  const expriesSpanTag = await expiresIconTag.$("span");
+
+                  if (expriesSpanTag) {
+                    expiredTime = await page.evaluate(
+                      (tag) => tag.textContent,
+                      expriesSpanTag
+                    );
+                  }
+                }
+
+
+                // Retrieving URL and Title
+                const titleTag = await listDeals[index].$(
+                  "a.cept-tt.thread-link.linkPlain.thread-title--list"
+                );
+                title = await page.evaluate((tag) => tag.textContent, titleTag);
+                url = await page.evaluate(
+                  (url) => url.getAttribute("href"),
+                  titleTag
+                );
+
+                // Retrieving price
+                const priceTag = await listDeals[index].$(
+                  "span.thread-price.text--b.cept-tp.size--all-l.size--fromW3-xl"
+                );
+
+                if (priceTag) {
+                  price = await page.evaluate((tag) => tag.textContent, priceTag);
                 } else {
-                  insertedTime = ''
+                  price = 'FREE'
                 }
+
+                // Retrieving author username
+                const userTag = await listDeals[index].$('span.thread-username');
+                username = await page.evaluate((tag) => tag.textContent, userTag);
+                username = username.replace(/\s/g, "");
+
+                //Inserting to array of deals
+                brokenDeals.push({
+                  title: title,
+                  url: url,
+                  img: imgDeal,
+                  upvote: upvote,
+                  price: price,
+                  username: username,
+                  insertedTime: insertedTime,
+                  expiredTime: expiredTime
+                })
               }
-
-              // Retrieving expired time
-              const expiresIconTag = await listDeals[index].$("span.metaRibbon.cept-meta-ribbon.cept-meta-ribbon-expires")
-              if (expiresIconTag) {
-                const expriesSpanTag = await expiresIconTag.$("span");
-
-                if (expriesSpanTag) {
-                  expiredTime = await page.evaluate(
-                    (tag) => tag.textContent,
-                    expriesSpanTag
-                  );
-                }
-              }
-
-
-              // Retrieving URL and Title
-              const titleTag = await listDeals[index].$(
-                "a.cept-tt.thread-link.linkPlain.thread-title--list"
-              );
-              title = await page.evaluate((tag) => tag.textContent, titleTag);
-              url = await page.evaluate(
-                (url) => url.getAttribute("href"),
-                titleTag
-              );
-
-              // Retrieving price
-              const priceTag = await listDeals[index].$(
-                "span.thread-price.text--b.cept-tp.size--all-l.size--fromW3-xl"
-              );
-
-              if (priceTag) {
-                price = await page.evaluate((tag) => tag.textContent, priceTag);
-              } else {
-                price = 'FREE'
-              }
-
-              // Retrieving author username
-              const userTag = await listDeals[index].$('span.thread-username');
-              username = await page.evaluate((tag) => tag.textContent, userTag);
-              username = username.replace(/\s/g, "");
-
-              //Inserting to array of deals
-              brokenDeals.push({
-                title: title,
-                url: url,
-                img: imgDeal,
-                upvote: upvote,
-                price: price,
-                username: username,
-                insertedTime: insertedTime,
-                expiredTime: expiredTime
-              })
             }
-          }
 
-          //log
-          if (brokenDeals.length > 0) {
-            console.info(new Date().toLocaleString() + ' : Dealabs.brokenDeals : ' + brokenDeals.length)
+            //log
+            if (brokenDeals.length > 0) {
+              console.info(new Date().toLocaleString() + ' : Dealabs.brokenDeals : ' + brokenDeals.length)
+            }
+          } catch (error) {
+            console.error(new Date().toLocaleString() + ' Dealabs.brokenDeals Error :' + error);
+            throw error;
+          } finally {
+            await browser.close();
           }
-        } catch (error) {
-          console.error(new Date().toLocaleString() + ' Dealabs.brokenDeals Error :' + error);
-          throw error;
-        } finally {
-          await browser.close();
-        }
-      }, 2000);
-
+        }, 2000);
+      } catch (error) {
+        console.log("CATCH SUR LE BROWSER : " + error);
+      } finally {
+        browser.close();
+      }
     });
 
   } catch (error) {
