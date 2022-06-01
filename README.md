@@ -56,7 +56,3 @@ Ajoutez le à votre serveur ici : [HakuBot](https://discord.com/api/oauth2/autho
   Si cela ne marche pas, ouvrir un ticket issue sur ce repository.
   
 > Fait par Zakichanu, avec l'aide de Mehdi et Baghdadi
-  
-  Merci de mettre un upvote ici :
-  
-  <a href="https://discordbotlist.com/bots/932725902691958815"><img src="https://discordbotlist.com/api/v1/bots/932725902691958815/widget"></a>
